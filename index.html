@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HOLD!</title>
+
+	<style>
+		body {
+		margin: 0;
+		padding: 0;
+		background: black;
+		font-family: Arial, sans-serif;
+		}
+
+		nav {
+		width: 1180px;
+		height: 70px;
+		padding: 0 35px;
+		position: fixed;
+		top: 35px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 100;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: rgba(255, 255, 255, 0.2);
+		backdrop-filter: blur(15px);
+		-webkit-backdrop-filter: blur(15px);
+		border-radius: 45px;
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+		}
+
+		.nav-left,
+		.nav-right {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		}
+
+		.nav-logo {
+		position: relative;
+		z-index: 2;
+		font-size: 24px;
+		font-weight: 800;
+		letter-spacing: 8px;
+		color: #0050b8;
+		margin-right: 45px;
+		padding-left: 10px;
+		text-transform: uppercase;
+		}
+
+		.nav-pill {
+		position: absolute;
+		width: 90px;
+		height: 46px;
+		background: rgba(255,255,255,0.45);
+		border-radius: 30px;
+		transition: all 0.4s ease;
+		z-index: 1;
+		}
+
+		nav a {
+		padding: 12px 22px;
+		position: relative;
+		z-index: 2;
+		text-decoration: none;
+		color: black;
+		font-size: 16px;
+		font-style: italic;
+		border-radius: 30px;
+		transition: all 0.3s ease;
+		}
+
+		nav a:hover {
+		background: rgba(255, 255, 255, 0.25);
+		}
+
+		.home {
+		height: 450vh; /* for the scroll thing.. vh meaning viewport height. if its 100vh, meaning full screen, 50vh half screen etcetc*/
+		position: relative;
+		}
+
+		.video-box {
+		width: 100%;
+		height: 100vh;
+		position: sticky;
+		top: 0px;
+		overflow: hidden;
+		}
+
+		#handVideo {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		}
+
+		.next-section {
+		height: 100vh;
+		background: #111;
+		color: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 50px;
+		}
+
+		.about {
+		min-height: 100vh;
+		padding: 180px 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #f2f2f2;
+		box-sizing: border-box;
+		}
+
+		.about-text {
+		width: 870px;
+		text-align: center;
+		}
+
+		.about-text h1 {
+		font-size: 55px;
+		color: #0050b8;
+		line-height: 1.3;
+		margin: 0 0 30px 0;
+		font-weight: 700;
+		}
+
+		.about-text p {
+		font-size: 18px;
+		color: #666;
+		line-height: 1.3;
+		margin: 0;
+		}
+
+/*HAND MOVING HERE*/ 
+		.hand-move-section {
+		height: 250vh;
+		background: linear-gradient(to bottom, #f8f8f8, #d9d9d9);
+		position: relative;
+		}
+
+		.hand-move-box {
+		width: 100%;
+		height: 100vh;
+		position: sticky;
+		top: 0;
+		overflow: hidden;
+		}
+
+		.moving-hand {
+		position: absolute;
+		width: 1050px;
+		top: 130px;
+		right: -1050px;
+		}
+
+		.hand-text {
+		position: absolute;
+		left: 170px;
+		bottom: 120px;
+		color: #0050b8;
+		text-align: left;
+		}
+
+		.hand-text h1,
+		.about-text h1 {
+		font-size: 55px;
+		font-weight: 700;
+		line-height: 1.2;
+		margin: 0 0 25px 0;
+		}
+
+		.hand-text p,
+		.about-text p {
+		font-size: 18px;
+		color: #666;
+		margin: 0;
+		}
+
+/*FEATURE SECTION HERE*/
+		.features {
+		background: #f2f2f2;
+		padding: 180px 0;
+		}
+
+		.features-title {
+		text-align: center;
+		margin-bottom: 80px;
+		}
+
+		.features-title h1 {
+		font-size: 55px;
+		color: #0050b8;
+		margin: 0 0 20px 0;
+		}
+
+		.features-title p {
+		font-size: 18px;
+		color: #666;
+		margin: 0;
+		}
+
+		.feature-row {
+		width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		gap: 30px;
+		justify-content: center;
+		}
+
+		.feature-card {
+		width: 360px;
+		background: transparent;
+		border-radius: 30px;
+		padding: 0px;
+		text-align: center;
+		box-shadow: none;
+		}
+
+		.feature-card img,
+		.feature-card video {
+		width: 100%;
+		height: 260px;
+		object-fit: cover;
+		border-radius: 24px;
+		transition: transform 0.4s ease;
+		}
+
+		.feature-card h2 {
+		font-size: 28px;
+		color: #0050b8;
+		margin: 30px 0 12px 0;
+		}
+
+		.feature-card p {
+		font-size: 16px;
+		color: #555;
+		line-height: 1.5;
+		}
+
+		.feature-card:hover img,
+		.feature-card:hover video {
+		transform: scale(1.05);
+		}
+
+		.feature-tagline {
+		text-align: center;		  
+		font-size: 18px;
+	  	color: #666;
+	 	margin-top: 80px;
+		line-height: 1.4;
+		font-weight: 500;
+		}
+
+/*VID BG UBOXING*/
+		.video-break {
+		position: relative;
+		height: 100vh;
+		overflow: hidden;
+		}
+
+		.video-break video {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		}
+
+		.specs {
+		min-height: 100vh;
+		padding: 180px 0;
+		position: relative;
+		overflow: hidden;
+		background: #e9ecef;
+		box-sizing: border-box;
+		}
+
+		.spec-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transform: scale(1.45) translateX(250px);
+		transform-origin: center center;
+		opacity: 0.9;
+		object-position: 70% center;
+		}
+
+		.spec-gradient{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 320px;
+
+		background: linear-gradient(
+		to bottom,
+		rgba(242,242,242,0) 0%,
+		#f2f2f2 100%
+		);
+
+		z-index: 1;
+		}	
+
+		.spec-info {
+		position: relative;
+		z-index: 2;
+		width: 420px;
+		margin-left: 110px;
+		padding: 40px;
+		background: rgba(255,255,255,0.32);
+		backdrop-filter: blur(18px);
+		-webkit-backdrop-filter: blur(18px);
+		border: 1px solid rgba(255,255,255,0.45);
+		border-radius: 30px;
+		box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+		}
+
+		.spec-info h1 {
+		color: #0050b8;
+		font-size: 42px;
+		margin: 0 0 35px;
+		}
+
+		.spec-line {
+		text-align: left;
+		margin-bottom: 28px;
+		}
+
+		.spec-line h2 {
+		color: #0050b8;
+		font-size: 18px;
+		margin: 0 0 8px;
+		}
+
+		.spec-line p {
+		color: #333;
+		font-size: 15px;
+		line-height: 1.6;
+		margin: 0;
+		}	
+
+/*REVIEW STARTS HERE*/
+		.reviews {
+		background: #f2f2f2;
+		padding: 180px 0;
+		}
+
+		.reviews-wrap {
+		width: 1250px;
+		margin: 0 auto;
+		text-align: center;
+		}
+
+		.reviews-wrap h1 {
+		font-size: 55px;
+		color: #0050b8;
+		margin: 0 0 70px;
+		}
+
+		.review-row {
+		display: flex;
+		gap: 28px;
+		justify-content: center;
+		}
+
+		.review-card {
+		width: 330px;
+		min-height: 240px;
+		padding: 32px;
+		background: rgba(255,255,255,0.55);
+		border-radius: 35px;
+		box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+		text-align: left;
+		transition: transform 0.3s ease;
+		}
+
+		.review-card:hover {
+		transform: translateY(-10px) rotate(-1deg);
+		}
+
+		.review-card:nth-child(2):hover {
+		transform: translateY(-10px) rotate(1deg);
+		}
+
+		.review-card h2 {
+		color: #0050b8;
+		font-size: 20px;
+		margin: 0 0 25px;
+		letter-spacing: 2px;
+		}
+
+		.review-card p {
+		font-size: 20px;
+		line-height: 1.45;
+		color: #222;
+		margin: 0 0 25px;
+		}
+
+		.review-card span {
+		font-size: 14px;
+		color: #777;
+		}
+
+		.review-end {
+		margin-top: 70px;
+		color: #0050b8;
+		font-size: 16px;
+		text-align: center;
+		}
+
+/* the words or sentence for about is weird, revise it. make the margin enough padding top bot, enlarge the space between. top and bottom margin too shallow. remove box arah 3 atu, pic vid pic. coding isnt exactly right for the korean heart pic. its too far,  widespreaded position is not good. 1 side make it aligned. too much on the review section. material of product, ada skeleton kh nda dlmnya. maybe show mcm half pic tangan then half pic the inside of the tangan, nampakkan dalamnya. looks very complicated on shop. enough height. give more space. put hold arah nav. prof likes the colors yay. lmao  */
+
+
+/*DA POSITIONZZZ*/
+		.r1 {
+		left: 90px;
+		top: 260px;
+		}
+
+		.r2 {
+		right: 90px;
+		top: 260px;
+		}
+
+		.r3 {
+		left: 130px;
+		top: 450px;
+		}
+
+		.r4 {
+		right: 130px;
+		top: 450px;
+		}
+
+		.r5 {
+		left: 380px;
+		bottom: 230px;
+		}
+
+		.r6 {
+		right: 360px;
+		bottom: 230px;
+		}
+
+/*SHOPPINGGGGGG*/
+		.shop {
+		background: #f2f2f2;
+		padding: 180px 0;
+		text-align: center;
+		}
+
+		.shop-title {
+		display: inline-block;
+		color: #0050b8;
+		font-size: 60px;
+		font-weight: 700;
+		}
+
+		.shop h1 {
+		font-size: 60px;
+		color: #0050b8;
+		margin: 0;
+		}
+
+		.shop-sub {
+		font-size: 18px;
+		color: #666;
+		margin: 15px 0 70px 0;
+		}
+
+		.shop-grid {
+		width: 1200px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 45px;
+		}
+
+		.shop-item {
+		background: transparent;
+		padding: 0;
+		box-shadow: none;
+		text-align: center;
+		transition: transform 0.3s ease;
+		}
+
+		.shot-item:hover {
+		transform: translateY(-10px);
+		}
+
+		.shop-item img {
+		width: 100%;
+		height: 230px;
+		object-fit: cover;
+		border-radius: 28px;
+		box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+		}
+
+		.shop-item h2 {
+		font-size: 20px;
+		margin: 24px 0 8px;
+		color: #111;
+		font-style: italic;
+		}
+
+		.shop-item p {
+		font-size: 15px;
+		color: #0050b8;
+		font-weight: 700;
+		margin: 0;
+		}
+
+		.shop-item button {
+		margin-top: 18px;
+		padding: 11px 28px;
+		border-radius: 30px;
+		background: transparent;
+		color: #0050b8;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 1px;
+		border: 1.5px solid #0050b8;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		}
+
+		.shop-item button:hover {
+		background: transparent;
+		color: #0050b8;
+		}
+
+/*FOOTER GOES HERE*/
+		.footer {
+		background: #f5f5f5;
+		padding: 40px 0;
+		text-align: center;
+		border-top: 1px solid #e5e5e5;
+		}
+
+		.footer-logo {
+		text-align: center;
+		margin-bottom: 45px;
+		}
+
+		.footer-minimal h1 {
+		font-size: 18px;
+		letter-spacing: 6px;
+		color: #0050b8;
+		margin-bottom: 10px;
+		}
+
+		.footer-minimal p {
+		font-size: 12px;
+		color: #888;
+		}
+
+		.footer-content {
+		max-width: 1100px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		}
+
+		.footer-left h2,
+		.footer-right h2 {
+		font-size: 16px;
+		margin: 0 0 14px;
+		color: #555;
+		}
+
+		.footer-left p {
+		font-size: 13px;
+		color: #777;
+		margin: 6px 0;
+		}
+
+		.footer-links {
+		display: flex;
+		gap: 12px;
+		flex-wrap: wrap;
+		width: 360px;
+		justify-content: flex-end;
+		}
+
+		.footer-links a {
+		text-decoration: none;
+		color: #777;
+		font-size: 13px;
+		}
+
+		.footer-links a:hover {
+		color: #0050b8;
+		}
+
+/*TRY POPUP SHOP*/
+		.cart-popup {
+		 position: fixed;
+		 top: 0;
+		 left: 0;
+	 	 width: 100%;
+		 height: 100%;
+		 background: rgba(0,0,0,0.25);
+		 display: flex;
+		 justify-content: center;
+		 align-items: center;
+		 z-index: 99;
+		 opacity: 0;
+		 pointer-events: none;
+		 transition: opacity 0.3s ease;
+		}
+
+		.cart-popup.active {
+		opacity: 1;
+		pointer-events: all;
+		}
+
+		.cart-box {
+		 width: 380px;
+		 padding: 50px 40px;
+		 text-align: center;
+		 border-radius: 30px;
+		 background: rgba(255,255,255,0.85);
+		 backdrop-filter: blur(20px);
+		 display: flex;
+		 flex-direction: column;
+		 align-items: center;
+		 justify-content: center;
+		 position: relative;
+		}
+
+		.close-cart {
+		 position: absolute;
+		 top: 20px;
+		 right: 25px;
+		 border: none;
+		 background: none;
+		 font-size: 26px;
+		 cursor: pointer;
+		}
+
+		.cart-box h2 {
+		 color: #0050b8;
+		 font-size: 28px;
+		 margin-bottom: 15px;
+		}
+
+		.cart-box p {
+		 color: #555;
+		 font-size: 16px;
+		 margin-bottom: 25px;
+		}
+
+		.checkout-btn {
+		 margin-top: 20px;
+		 padding: 13px 30px;
+		 border: none;
+		 border-radius: 30px;
+		 background: #0050b8;
+		 color: white;
+		 font-weight: 700;
+		}
+	</style>
+</head>
+
+<body>
+
+<nav>
+	<div class="nav-logo">HOLD</div>
+	<div class="nav-pill"></div>
+	<a href="#home" class="active">Home</a>
+	<a href="#about">About</a>
+	<a href="#concept">Concept</a>
+	<a href="#features">Features</a>
+	<a href="#specs">Specs</a>
+	<a href="#reviews">Reviews</a>
+	<a href="#shop">Shop</a>
+</nav>
+
+	<section class="home" id="home">
+		<div class="video-box">
+			<video id="handVideo" muted playsinline preload="auto">
+				<source src="wowow.mp4" type="video/mp4">
+			</video>
+		</div>
+	</section>
+
+	<section class="about" id="about">
+		<div class="about-text">
+		<h1 class="kr">
+		EVERYDAY OBJECTS ARE NOT MADE TO STAY STILL.
+		</h1>
+
+		<p class="en">
+		We adjust them, balance them, and HOLD them again and again. <br> HOLD begins from this small but repeated inconvenience.
+		</p>
+		</div>
+	</section>
+
+	<section class="hand-move-section" id="concept">
+		<div class="hand-move-box">
+		<img src="tada.png" class="moving-hand">
+
+		<div class="hand-text">
+		<h1>손은 가장 자연스러운 지지 방식입니다. <br>대신 잡아주는 손이 있다면 어떨까요? </h1>
+
+		<p>The human hand is the most natural support system.<br>
+		What if something could hold objects for us?</p>
+		</div>
+		</div>
+	</section>
+
+	<section class="features" id="features">
+	<div class="features-title">
+		<h1>무엇이든 잡아주는 손.</h1>
+		<p>HOLD is designed for different everyday situations.</p>
+	</div>
+
+	<div class="feature-row">
+		<div class="feature-card">
+			<img src="f1.jpeg">
+			<h2>DON'T LOSE IT</h2>
+			<p>열쇠도, 지갑도, 정신도 잠시 맡겨보세요.</p>
+		</div>
+
+		<div class="feature-card">
+			<video autoplay muted loop playsinline>
+				<source src="f2.mp4" type="video/mp4">
+			</video>
+			<h2>LOOK PRETTY</h2>
+			<p>반지도 목걸이도 은근히 잘 받쳐줍니다.</p>
+		</div>
+
+		<div class="feature-card">
+			<img src="f3.jpeg">
+			<h2>PLEASE HOLD</h2>
+			<p>울음도 휴지도… 일단 잡아줍니다.</p>
+		</div>
+	</div>
+
+	<div class="feature-tagline">
+	  Designed to hold more than objects.<br>
+	  It holds your moment.
+	</div>
+
+	</section>
+
+	<section class="video-break">
+		<video autoplay muted loop playsinline>
+			<source src="unb.mp4" type="video/mp4">
+		</video>
+	</section>
+
+	<section class="specs" id="specs">
+	<img src="skel.jpeg" class="spec-bg">
+
+	<div class="spec-gradient"></div>
+	<div class="spec-info">
+		<h1>Inside HOLD.</h1>
+
+		<div class="spec-line">
+			<h2>01 Structure</h2>
+			<p>Internal support frame keeps the hand stable under everyday objects.</p>
+		</div>
+
+		<div class="spec-line">
+			<h2>02 Material</h2>
+			<p>High-density resin and metal-weighted base create balance and durability.</p>
+		</div>
+
+		<div class="spec-line">
+			<h2>03 Surface</h2>
+			<p>Soft-touch finish adds grip without making the object feel harsh.</p>
+		</div>
+	</div>
+	</section>
+
+	<section class="reviews" id="reviews">
+	<div class="reviews-wrap">
+		<h1>Testimonies</h1>
+
+		<div class="review-row">
+			<div class="review-card">
+				<h2>★★★★★</h2>
+				<p>“I didn’t know I needed an extra hand until this started holding my keys every day.”</p>
+				<span>— Minji, student</span>
+			</div>
+
+			<div class="review-card">
+				<h2>★★★★★</h2>
+				<p>“It feels oddly comforting. Like a tiny assistant that never complains.”</p>
+				<span>— Joon, designer</span>
+			</div>
+
+			<div class="review-card">
+				<h2>★★★★☆</h2>
+				<p>“Strange at first, but now my desk looks more playful and less chaotic.”</p>
+				<span>— Hana, office worker</span>
+			</div>
+		</div>
+
+		<p class="review-end">혼자가 아니에요.<br>잡아줄게요.</p>
+	</div>
+	</section>
+
+	<section class="shop" id="shop">
+		<h1 class="shop-title">SHOP HOLD.</h1>
+		<p class="shop-sub">Choose the hand that holds you best.</p>
+
+		<div class="shop-grid">
+
+			<div class="shop-item">
+				<img src="bronze.jpeg">
+				<h2>Matte Bronze</h2>
+				<p>₩33,000</p>
+				<button>ADD TO CART</button>
+			</div>
+
+			<div class="shop-item">
+				<img src="glass.jpeg">
+				<h2>Clear Glass</h2>
+				<p>₩88,000</p>
+				<button>ADD TO CART</button>
+			</div>
+
+			<div class="shop-item">
+				<img src="chrome.jpeg">
+				<h2>Polished Chrome</h2>
+				<p>₩55,000</p>
+				<button>ADD TO CART</button>
+			</div>
+
+			<div class="shop-item">
+				<img src="wood.jpeg">
+				<h2>Walnut Wood</h2>
+				<p>₩77,000</p>
+				<button>ADD TO CART</button>
+			</div>
+
+		</div>
+	</section>
+
+	<div class="cart-popup" id="cartPopup">
+  	<div class="cart-box">
+    <button class="close-cart" onclick="closeCart()">×</button>
+    <h2>Added to cart. <br> Congratulations!</h2>
+    <p>Your HOLD is waiting for you.</p>
+    <button class="checkout-btn">CHECKOUT</button>
+ 	</div>
+	</div>
+
+	<footer class="footer">
+	 <div class="footer-minimal">
+    <h1>HOLD</h1>
+    <p>© 2026 HOLD. All rights reserved.</p>
+  	</div>
+
+	<div class="footer-content">
+		<div class="footer-left">
+			<h2>Contact</h2>
+			<p>Seoul, Korea</p>
+			<p>promiseillholdyou@studio.com</p>
+		</div>
+
+		<div class="footer-right">
+			<h2>Page</h2>
+			<div class="footer-links">
+				<a href="#home">Home</a>
+				<a href="#about">About</a>
+				<a href="#concept">Concept</a>
+				<a href="#features">Features</a>
+				<a href="#specs">Specs</a>
+				<a href="#reviews">Reviews</a>
+				<a href="#shop">Shop</a>
+			</div>
+		</div>
+	</div>
+	</footer>
+
+
+<!-- here comes the java script oh nooo -->
+<script>
+	const navLinks = document.querySelectorAll("nav a");
+	const navPill = document.querySelector(".nav-pill");
+
+	function movePill(link) {
+		navPill.style.width = link.offsetWidth + "px";
+		navPill.style.left = link.offsetLeft + "px";
+	}
+
+	navLinks.forEach(link => {
+		link.addEventListener("click", function () {
+			navLinks.forEach(a => a.classList.remove("active"));
+			this.classList.add("active");
+			movePill(this);
+		});
+	});
+
+	window.addEventListener("load", function () {
+		const activeLink = document.querySelector("nav a.active");
+		movePill(activeLink);
+	});
+</script>
+<script>
+	const video = document.getElementById("handVideo");
+	const home = document.querySelector(".home");
+
+	let targetTime = 0;
+	let currentTime = 0;
+
+	video.addEventListener("loadedmetadata", function () {
+
+		function updateTargetTime() {
+			const rect = home.getBoundingClientRect();
+
+			const start = 0;
+			const end = home.offsetHeight - window.innerHeight;
+
+			let progress = -rect.top / end;
+
+			if (progress < 0) progress = 0;
+			if (progress > 1) progress = 1;
+
+			targetTime = video.duration * progress;
+		}
+
+		function smoothVideo() {
+			updateTargetTime();
+
+			currentTime += (targetTime - currentTime) * 0.08;
+
+			if (Math.abs(targetTime - currentTime) < 0.01) {
+				currentTime = targetTime;
+			}
+
+			video.currentTime = currentTime;
+
+			requestAnimationFrame(smoothVideo);
+		}
+
+		smoothVideo();
+	});
+</script>
+<script>
+	const sections = document.querySelectorAll("section[id]");
+
+	window.addEventListener("scroll", function () {
+		let currentId = "";
+
+		sections.forEach(section => {
+			const sectionTop = section.offsetTop;
+			const sectionHeight = section.offsetHeight;
+
+			if (window.scrollY >= sectionTop - 200 &&
+				window.scrollY < sectionTop + sectionHeight - 200) {
+				currentId = section.getAttribute("id");
+			}
+		});
+
+		if (currentId !== "") {
+			const currentLink = document.querySelector('nav a[href="#' + currentId + '"]');
+
+			if (currentLink) {
+				navLinks.forEach(a => a.classList.remove("active"));
+				currentLink.classList.add("active");
+				movePill(currentLink);
+			}
+		}
+	});
+</script>
+<script>
+	const moveSection = document.querySelector(".hand-move-section");
+	const movingHand = document.querySelector(".moving-hand");
+
+	window.addEventListener("scroll", function () {
+		const rect = moveSection.getBoundingClientRect();
+		const scrollLength = moveSection.offsetHeight - window.innerHeight;
+
+		let progress = -rect.top / scrollLength;
+
+		if (progress < 0) progress = 0;
+		if (progress > 1) progress = 1;
+
+		let start = -650;
+		let end = -80;
+
+		let moveX = start + (end - start) * progress;
+
+		movingHand.style.right = moveX + "px";
+	});
+</script>
+<script>
+  const cartPopup = document.getElementById("cartPopup");
+  const cartButtons = document.querySelectorAll(".shop-item button");
+
+  cartButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      cartPopup.classList.add("active");
+    });
+  });
+
+  function closeCart() {
+    cartPopup.classList.remove("active");
+  }
+</script>
+
+</body>
+</html>
