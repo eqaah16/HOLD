@@ -6,10 +6,12 @@
 	<title>HOLD!</title>
 
 	<style>
-		body {
+		html, body {
 		margin: 0;
+		min-width: 1600px;
+		overflow-x: auto;
 		padding: 0;
-		background: black;
+		background: #f2f2f2;
 		font-family: Arial, sans-serif;
 		}
 
@@ -79,8 +81,9 @@
 		}
 
 		.home {
-		height: 450vh; /* for the scroll thing.. vh meaning viewport height. if its 100vh, meaning full screen, 50vh half screen etcetc*/
+		height: 190vh; /* for the scroll thing.. vh meaning viewport height. if its 100vh, meaning full screen, 50vh half screen etcetc*/
 		position: relative;
+		background: #f2f2f2;
 		}
 
 		.video-box {
@@ -109,6 +112,9 @@
 
 		.about {
 		min-height: 100vh;
+		margin-top: -90vh;
+		position: relative;
+		z-index: 3;
 		padding: 180px 0;
 		display: flex;
 		justify-content: center;
@@ -139,7 +145,7 @@
 
 /*HAND MOVING HERE*/ 
 		.hand-move-section {
-		height: 250vh;
+		height: 130vh;
 		background: linear-gradient(to bottom, #f8f8f8, #d9d9d9);
 		position: relative;
 		}
@@ -535,8 +541,8 @@
 		}
 
 		.shop-item button:hover {
-		background: transparent;
-		color: #0050b8;
+		background: #0050b8;
+		color: white;
 		}
 
 /*FOOTER GOES HERE*/
